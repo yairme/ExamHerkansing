@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class PickUp_Drop : MonoBehaviour
 {
-    [SerializeField] private PickUp_DropManager Manager;
-    private bool isActive = false;
+    private bool IsActive = false;
+    public bool IsItActive
+    {
+        get { return IsActive; }
+        set { IsActive = value; }
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && this.gameObject.CompareTag("PickUp"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            if (Manager.TotalPassengers < Manager.TotalMaxPassengers)
-            {
-                Manager.TotalPassengers = Manager.TotalMaxPassengers;
-            }
-        }
-        if (other.gameObject.CompareTag("Player") && this.gameObject.CompareTag("Drop"))
-        {
-            if (Manager.TotalPassengers > 0)
-            {
-                Manager.TotalPassengers -= 1;
-            }
+            IsActive = true;
         }
     }
 }
