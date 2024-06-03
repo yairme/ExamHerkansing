@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimerText: {fileID: 0}
   TimerDuration: 60
+  AddedTime: 10
   gameOverPanel: {fileID: 0}
 --- !u!114 &6001227368276516996
 MonoBehaviour:

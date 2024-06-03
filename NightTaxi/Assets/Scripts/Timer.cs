@@ -5,6 +5,7 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI TimerText;
     [SerializeField] private float TimerDuration;
+    [SerializeField] private float AddedTime;
     private float TimeRemaining;
     private bool TimerIsRunning = false;
 
@@ -58,9 +59,9 @@ public class Timer : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    public void AddTime(float additionalTime)
+    public void AddTime()
     {
-        TimeRemaining += additionalTime;
+        TimeRemaining += AddedTime;
         if (TimeRemaining > 0 && !TimerIsRunning)
         {
             TimerIsRunning = true;

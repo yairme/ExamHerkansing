@@ -9,7 +9,7 @@ public class TimeAdder : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Timer.AddTime(TimeToAdd);
+            Timer.AddTime();
         }
     }
 }
