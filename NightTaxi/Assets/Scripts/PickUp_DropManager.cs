@@ -4,33 +4,19 @@ using UnityEngine;
 public class PickUp_DropManager : MonoBehaviour
 {
     [SerializeField] private int MaxPassengers = 0;
+    [SerializeField] private int AddScore = 0;
     [SerializeField] private GameObject[] DropPoints;
     [SerializeField] private PickUp_Drop PickUpPoint;
     private int ActiveDropPoints = 0;
     private int Passengers = 0;
-    private bool IsPickup = false;
-    private bool IsDropped = false;
+    private int Score = 0;
     public int GetPassengers
     {
         get { return Passengers; }
     }
-    public bool OnPickUpBool
+    public int GetScore
     {
-        get { return IsPickup; }
-        set { IsPickup = value; }
-    }
-    public bool OnDropBool
-    {
-        get { return IsDropped; }
-        set { IsDropped = value; }
-    }
-    private void Update()
-    {
-        if (PickUpPoint.IsItActive)
-        {
-            OnPickUp();
-        }
-        OnDrop();
+        get { return Score; }
     }
     private void OnPickUp()
     {
@@ -39,7 +25,6 @@ public class PickUp_DropManager : MonoBehaviour
             Passengers = MaxPassengers;
             RandomDropSetActive();
             PickUpPoint.IsItActive = false;
-            IsPickup = true;
         }
     }
     private void OnDrop()
@@ -51,9 +36,10 @@ public class PickUp_DropManager : MonoBehaviour
                 if (Passengers > 0)
                 {
                     Passengers--;
+                    ActiveDropPoints--;
+                    Score += AddScore;
                     dropPoint.GetComponent<PickUp_Drop>().IsItActive = false;
                     dropPoint.SetActive(false);
-                    IsDropped = true;
                 }
             }
         }
