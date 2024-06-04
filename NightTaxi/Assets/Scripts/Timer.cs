@@ -1,71 +1,52 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.Serialization;
+
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI TimerText;
-    [SerializeField] private float TimerDuration;
-    [SerializeField] private float AddedTime;
-    private float TimeRemaining;
-    private bool TimerIsRunning = false;
+    [SerializeField] private float timerDuration;
+    [SerializeField] private float addedTime;
+    private float thisTimeRemaining;
+    private bool timerIsRunning;
 
-    public GameObject gameOverPanel;
+    public float TimeRemaining
+    {
+        get => thisTimeRemaining; 
+    }
 
-    void Start()
+    public bool IsTimerRunning
+    {
+        get => timerIsRunning;
+    }
+    
+    public void StartTimer()
     { 
-        TimeRemaining = TimerDuration;
-        TimerIsRunning = true;
-        gameOverPanel.SetActive(false);
+        thisTimeRemaining = timerDuration;
+        timerIsRunning = true;
     }
 
     void Update()
     {
-        if (TimerIsRunning)
+        if (timerIsRunning)
         {
-            if (TimeRemaining > 0)
+            if (thisTimeRemaining > 0)
             {
-                TimeRemaining -= Time.deltaTime;
-                DisplayTime(TimeRemaining);
+                thisTimeRemaining -= Time.deltaTime;
             }
             else
             {
-                TimeRemaining = 0;
-                TimerIsRunning = false;
-                DisplayTime(TimeRemaining);
-                GameOver();
+                thisTimeRemaining = 0;
+                timerIsRunning = false;
             }
         }
-    }
-
-    void DisplayTime(float timeToDisplay)
-    {
-        //timeToDisplay += 1;
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        TimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        
-        if (TimeRemaining < 10)
-        {
-            TimerText.color = Color.red;
-        }
-        else
-        {
-            TimerText.color = Color.white;
-        }
-    }
-
-    void GameOver()
-    {
-        gameOverPanel.SetActive(true);
     }
 
     public void AddTime()
     {
-        TimeRemaining += AddedTime;
-        if (TimeRemaining > 0 && !TimerIsRunning)
+        thisTimeRemaining += addedTime;
+        if (thisTimeRemaining > 0 && !timerIsRunning)
         {
-            TimerIsRunning = true;
+            timerIsRunning = true;
         }
-        DisplayTime(TimeRemaining);
     }
 }
