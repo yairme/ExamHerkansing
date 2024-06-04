@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 public class PickUp_Drop : MonoBehaviour
 {
+    [SerializeField] private GameObject PopUp;
     [SerializeField] private UnityEvent Trigger;
     private bool IsActive = false;
     public bool IsItActive
@@ -13,15 +14,23 @@ public class PickUp_Drop : MonoBehaviour
         get { return IsActive; }
         set { IsActive = value; }
     }
-    private void Start() {
-        Trigger = new UnityEvent();
-    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.tag == "Player" && !IsActive)
         {
             Trigger.Invoke();
             IsActive = true;
+            OnTriggerPopUp();
+        }
+    }
+    private void OnTriggerPopUp()
+    {
+        var _internalTimer = 5f;
+        _internalTimer -= Time.deltaTime;
+        PopUp.SetActive(true);
+        if (_internalTimer <= 0)
+        {
+            PopUp.SetActive(false);
         }
     }
 }
