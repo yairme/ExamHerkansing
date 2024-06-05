@@ -3,34 +3,29 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using NUnit.Framework;
+using Unity.VisualScripting;
 
 public class PickUp_Drop : MonoBehaviour
 {
-    [SerializeField] private GameObject PopUp;
+
     [SerializeField] private UnityEvent Trigger;
-    private bool IsActive = false;
+    private bool IsActive;
     public bool IsItActive
     {
-        get { return IsActive; }
-        set { IsActive = value; }
+        get => IsActive; 
+        set => IsActive = value; 
     }
-    private void OnTriggerEnter(Collider other)
+    private void Start()
+    {
+        IsActive = false;
+    }
+    private void OnTriggerEnter(Collider other) //Player Object needs Rigidbody and Collider
     {
         if (other.tag == "Player" && !IsActive)
         {
-            Trigger.Invoke();
             IsActive = true;
-            OnTriggerPopUp();
+            Trigger.Invoke();
         }
     }
-    private void OnTriggerPopUp()
-    {
-        var _internalTimer = 5f;
-        _internalTimer -= Time.deltaTime;
-        PopUp.SetActive(true);
-        if (_internalTimer <= 0)
-        {
-            PopUp.SetActive(false);
-        }
-    }
+
 }

@@ -1,22 +1,31 @@
-using NUnit.Framework;
 using UnityEngine;
 
 public class PickUp_DropManager : MonoBehaviour
 {
-    [SerializeField] private int MaxPassengers = 0;
-    [SerializeField] private int AddScore = 0;
+    [SerializeField] private int MaxPassengers;
+    [SerializeField] private int AddScore;
     [SerializeField] private GameObject PickUpPoint;
     [SerializeField] private GameObject[] DropPoints;
-    private int ActiveDropPoints = 0;
+    [SerializeField] private GameObject[] ActiveDropPoints;
+
+    private int ActiveDropPointCount = 0;
     private int Passengers = 0;
     private int Score = 0;
     public int GetPassengers
     {
-        get { return Passengers; }
+        get => Passengers; 
     }
     public int GetScore
     {
-        get { return Score; }
+        get => Score; 
+    }
+    private void Start()
+    {
+        foreach (GameObject dropPoint in DropPoints)
+        {
+            dropPoint.SetActive(false);
+        }
+        ActiveDropPoints = new GameObject[MaxPassengers];
     }
     public void OnPickUp()
     {
@@ -29,50 +38,42 @@ public class PickUp_DropManager : MonoBehaviour
     }
     public void OnDrop()
     {
-        foreach (GameObject dropPoint in DropPoints)
+        Passengers--;
+        ActiveDropPointCount--;
+        Score += AddScore;
+        PickUpPoint.GetComponent<PickUp_Drop>().IsItActive = false;
+        for (int i = 0; i < DropPoints.Length; i++)
         {
-            if (!dropPoint.activeSelf && dropPoint.GetComponent<PickUp_Drop>().IsItActive == false) { continue; }
-            if (Passengers > 0)
+            for (int j = 0; j < ActiveDropPoints.Length; j++)
             {
-                Passengers--;
-                ActiveDropPoints--;
-                Score += AddScore;
-                PickUpPoint.GetComponent<PickUp_Drop>().IsItActive = false;
-                dropPoint.GetComponent<PickUp_Drop>().IsItActive = true;
-                dropPoint.SetActive(false);
+                if (ActiveDropPoints[j] == DropPoints[i] && ActiveDropPoints[j].GetComponent<PickUp_Drop>().IsItActive)
+                {
+                    DropPoints[i].GetComponent<PickUp_Drop>().IsItActive = false;
+                    DropPoints[i].SetActive(false);
+                    ActiveDropPoints[j] = null;
+                    break;
+                }
             }
         }
     }
     private void RandomDropSetActive()
     {
-        foreach (GameObject dropPoint in DropPoints)
+        for (int i = 0; i < MaxPassengers; i++)
         {
-            int randomDrop = Random.Range(0, DropPoints.Length);
-            var chosenDropPoint = DropPoints[randomDrop];
-            Debug.Log(randomDrop + " was chosen from " + DropPoints.Length + " drop points and it is " + chosenDropPoint.name + ".");
-
-            if (chosenDropPoint.activeSelf) { Debug.Log("Continue"); continue;}
-            if (ActiveDropPoints == MaxPassengers) { Debug.Log("Break"); break;}
-            ActiveDropPointsCount();
-            chosenDropPoint.SetActive(true);
-        }
-    }
-    private void ActiveDropPointsCount()
-    {
-        for (int i = 0; i < DropPoints.Length; i++)
-        {
-            Debug.Log(DropPoints[i].name + " Were checked.");
-            if (DropPoints[i].activeSelf)
+            if (ActiveDropPointCount == MaxPassengers) break;
+            int randomIndex = Random.Range(0, DropPoints.Length);
+            if (DropPoints[randomIndex].activeSelf && DropPoints[randomIndex]) i--;
+            else
             {
-                Debug.Log(DropPoints[i].name + " is active.");
-                ActiveDropPoints++;
+                if (ActiveDropPoints[i] != null) continue;//This line is added to prevent null reference exception (IndexOutOfRangeException
+                ActiveDropPoints[i] = DropPoints[randomIndex];
+                DropPoints[randomIndex].SetActive(true);
+                ActiveDropPointCount++;
             }
         }
     }
-
-
     public void Test()
     {
-        Debug.Log($"Player has {GetPassengers} passengers and {GetScore} score, and there are {ActiveDropPoints} active drop points.");
+        Debug.Log($"Player has {GetPassengers} passengers and {GetScore} score, and there are {ActiveDropPointCount} active drop points.");
     }
 }
