@@ -21,10 +21,4 @@ public class TimeDisplay : MonoBehaviour
             TimerText.color = Color.white;
         }
     }
-    
-    public void GameOver(GameObject gameOverPanel)
-    {
-        if (timer.IsTimerRunning) return;
-        gameOverPanel.SetActive(true);
-    }
 }
