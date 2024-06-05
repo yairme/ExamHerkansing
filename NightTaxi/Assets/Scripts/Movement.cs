@@ -1,24 +1,31 @@
 using UnityEngine;
-
-public enum State
+public enum Direction
 {
     UP,DOWN, LEFT, RIGHT
 }
-public enum Direction
+public enum Turn
 {
     BASE, LEFT, RIGHT
 }
 public class Movement : MonoBehaviour
 {
-    [SerializeField]private float BaseSpeed;
+    [SerializeField] private float BaseSpeed;
+    [SerializeField] private float WallDistance;
     private float PlayerSpeed;
-    private State Stating = State.DOWN;
-    private Direction Pref = Direction.BASE;
+    private Direction CurentDirection = Direction.UP;
+    private Direction TempDirection;
+    private Turn Pref = Turn.BASE;
+
+    private void Start()
+    {
+        PlayerSpeed = BaseSpeed;
+    }
 
     void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * PlayerSpeed * Time.deltaTime);
+        transform.Translate(PlayerSpeed * Time.deltaTime * Vector3.forward);
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -38,104 +45,150 @@ public class Movement : MonoBehaviour
             Up();
         }
     }
+
     private void Rigth()
     {
-        switch (Stating)
+        switch (CurentDirection)
         {
-            case State.UP:
-                Pref = Direction.RIGHT;
+            case Direction.UP:
+                Pref = Turn.RIGHT;
                 break;
-            case State.DOWN:
-                Pref = Direction.LEFT;
+            case Direction.DOWN:
+                Pref = Turn.LEFT;
                 break;
-            case State.LEFT:
-                transform.Rotate(Vector3.up * 180.0f);
-                PlayerSpeed = BaseSpeed;
-                break;
-            case State.RIGHT:
+            case Direction.LEFT:
+                Turning(Turn.BASE);
+                CurentDirection = Direction.RIGHT;
+                return;
+            case Direction.RIGHT:
                 return;
         }
-        Stating = State.RIGHT;
+       TempDirection = Direction.RIGHT;
     }
+
     private void Left()
     {
-        switch (Stating)
+        switch (CurentDirection)
         {
-            case State.UP:
-                Pref = Direction.LEFT;
+            case Direction.UP:
+                Pref = Turn.LEFT;
                 break;
-            case State.DOWN:
-                Pref = Direction.RIGHT;
+            case Direction.DOWN:
+                Pref = Turn.RIGHT;
                 break;
-            case State.RIGHT:
-                transform.Rotate(Vector3.up * 180.0f);
-                PlayerSpeed = BaseSpeed;
-                break;
-            case State.LEFT:
+            case Direction.RIGHT:
+                Turning(Turn.BASE);
+                CurentDirection = Direction.LEFT;
+                return;
+            case Direction.LEFT:
                 return;
         }
-        Stating = State.LEFT;
+        TempDirection = Direction.LEFT;
     }
+
     private void Down()
     {
-        switch (Stating)
+        switch (CurentDirection)
         {
-            case State.UP:
-                transform.Rotate(Vector3.up * 180.0f);
-                PlayerSpeed = BaseSpeed;
+            case Direction.UP:
+                Turning(Turn.BASE);
+                CurentDirection = Direction.DOWN;
+                return;
+            case Direction.RIGHT:
+                Pref = Turn.RIGHT;
                 break;
-            case State.RIGHT:
-                Pref = Direction.RIGHT;
+            case Direction.LEFT:
+                Pref = Turn.LEFT;
                 break;
-            case State.LEFT:
-                Pref = Direction.LEFT;
-                break;
-            case State.DOWN:
+            case Direction.DOWN:
                 return;
         }
-        Stating = State.DOWN;
+        TempDirection = Direction.DOWN;
     }
+
     private void Up()
     {
-        switch (Stating)
+        switch (CurentDirection)
         {
-            case State.DOWN:
-                transform.Rotate(Vector3.up * -180.0f);
-                PlayerSpeed = BaseSpeed;
+            case Direction.DOWN:
+                Turning(Turn.BASE);
+                CurentDirection = Direction.UP;
+                return;
+            case Direction.LEFT:
+                Pref = Turn.RIGHT;
                 break;
-            case State.LEFT:
-                Pref = Direction.RIGHT;
+            case Direction.RIGHT:
+                Pref = Turn.LEFT;
                 break;
-            case State.RIGHT:
-                Pref = Direction.LEFT;
-                break;
-            case State.UP:
-                break;
+            case Direction.UP:
+                return;
         }
-        Stating = State.UP;
+        TempDirection = Direction.UP;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
 
-        if (Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hitInfo, 10))
+    private void OnTriggerEnter(Collider other)
+    {
+        transform.position = other.transform.position;
+        if (Pref == Turn.LEFT)
+        {
+            if (!Physics.Raycast(transform.position, Vector3.Cross(transform.forward, transform.up), WallDistance))
+            {
+                Turning(Turn.LEFT);
+            }
+        }
+        if (Pref == Turn.RIGHT)
+        {
+            if (Physics.Raycast(transform.position, Vector3.Cross(transform.forward, -transform.up), WallDistance))
+            {
+                Turning(Turn.RIGHT);
+            }
+        }
+        if (Physics.Raycast(transform.position, transform.forward, WallDistance))
         {
             PlayerSpeed = 0;
-            // call function
-        }
-
-        if (Pref == Direction.LEFT)
-        {
-            if(!Physics.Raycast(transform.position, Vector3.left, out RaycastHit hitInf, 10))
-            {
-                transform.Rotate(Vector3.up * -90.0f);
-            }
-        }
-        if (Pref == Direction.RIGHT)
-        {
-            if (!Physics.Raycast(transform.position, Vector3.right, out RaycastHit hitIn, 10))
-            {
-                transform.Rotate(Vector3.up * 90.0f);
-            }
         }
     }
+
+    private void Turning(Turn _turn)
+    {
+        switch (_turn)
+        {
+            case Turn.BASE:
+                transform.Rotate(Vector3.up * -180.0f);
+                return;
+            case Turn.LEFT:
+                transform.Rotate(Vector3.up * -90.0f);
+                break;
+            case Turn.RIGHT:
+                transform.Rotate(Vector3.up * 90.0f);
+                break;
+            default:
+                break;
+        }
+        CurentDirection = TempDirection;
+    }
+
+    //private void StopMovement()
+    //{
+    //    PlayerSpeed = 0;
+    //    //switch (Pref)
+    //    //{
+    //    //    case Turn.BASE:
+    //    //            Physics.Raycast(transform.position, Vector3.right, out RaycastHit _right, 10);
+    //    //            if (!_right.collider.CompareTag("Wall"))
+    //    //            {
+    //    //                Pref = Turn.RIGHT;
+    //    //            }
+    //    //            Pref = Turn.LEFT;
+    //    //        break;
+
+    //    //    case Turn.LEFT:
+    //    //        // wait for down or right input
+    //    //        break;
+
+    //    //    case Turn.RIGHT:
+    //    //        // wait for left or down input
+    //    //        break;
+    //    //}
+    //}
 }
