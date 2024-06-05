@@ -6,8 +6,7 @@ public class PickUp_DropManager : MonoBehaviour
     [SerializeField] private int AddScore;
     [SerializeField] private GameObject PickUpPoint;
     [SerializeField] private GameObject[] DropPoints;
-    [SerializeField] private GameObject[] ActiveDropPoints;
-
+    private GameObject[] ActiveDropPoints;
     private int ActiveDropPointCount = 0;
     private int Passengers = 0;
     private int Score = 0;
@@ -71,9 +70,5 @@ public class PickUp_DropManager : MonoBehaviour
                 ActiveDropPointCount++;
             }
         }
-    }
-    public void Test()
-    {
-        Debug.Log($"Player has {GetPassengers} passengers and {GetScore} score, and there are {ActiveDropPointCount} active drop points.");
     }
 }
