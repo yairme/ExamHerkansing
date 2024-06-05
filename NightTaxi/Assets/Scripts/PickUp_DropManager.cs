@@ -1,15 +1,18 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PickUp_DropManager : MonoBehaviour
 {
     [SerializeField] private int MaxPassengers;
     [SerializeField] private int AddScore;
-    [SerializeField] private GameObject PickUpPoint;
-    [SerializeField] private GameObject[] DropPoints;
-    private GameObject[] ActiveDropPoints;
+    [SerializeField] private UnityEvent OnDropEvent;
+    [SerializeField] private UnityEvent OnPickUpEvent;
     private int ActiveDropPointCount = 0;
     private int Passengers = 0;
     private int Score = 0;
+    private GameObject PickUpPoint;
+    private GameObject[] DropPoints;
+    private GameObject[] ActiveDropPoints;
     public int GetPassengers
     {
         get => Passengers; 
@@ -18,10 +21,17 @@ public class PickUp_DropManager : MonoBehaviour
     {
         get => Score; 
     }
+    private void Awake()
+    {  
+        DropPoints = GameObject.FindGameObjectsWithTag("Drop");
+        PickUpPoint = GameObject.FindGameObjectWithTag("PickUp");
+    }
     private void Start()
     {
+        PickUpPoint.GetComponent<PickUp_Drop>().SetTrigger = OnPickUpEvent;
         foreach (GameObject dropPoint in DropPoints)
         {
+            dropPoint.GetComponent<PickUp_Drop>().SetTrigger = OnDropEvent;
             dropPoint.SetActive(false);
         }
         ActiveDropPoints = new GameObject[MaxPassengers];

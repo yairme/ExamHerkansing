@@ -7,13 +7,17 @@ using Unity.VisualScripting;
 
 public class PickUp_Drop : MonoBehaviour
 {
-
-    [SerializeField] private UnityEvent Trigger;
+    private UnityEvent Trigger;
     private bool IsActive;
     public bool IsItActive
     {
         get => IsActive; 
         set => IsActive = value; 
+    }
+    public UnityEvent SetTrigger
+    {
+        get => Trigger;
+        set => Trigger = value;
     }
     private void Start()
     {

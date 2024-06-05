@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6735562949270323911}
   m_Layer: 0
   m_Name: DropPoint
-  m_TagString: Untagged
+  m_TagString: Drop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8e9452a7e30084d89bab1a5d2dcbd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PopUpTimer: 5
-  PopUp: {fileID: 0}
   Trigger:
     m_PersistentCalls:
       m_Calls:
