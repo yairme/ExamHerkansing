@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
-using NUnit.Framework;
-using Unity.VisualScripting;
 
 public class PickUp_Drop : MonoBehaviour
 {
@@ -31,5 +27,4 @@ public class PickUp_Drop : MonoBehaviour
             Trigger.Invoke();
         }
     }
-
 }

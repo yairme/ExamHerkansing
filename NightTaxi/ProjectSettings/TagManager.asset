@@ -8,6 +8,8 @@ TagManager:
   - Drop
   - DropHighlight
   - PickUpHighlight
+  - OnDropParticle
+  - OnPickUpParticle
   layers:
   - Default
   - TransparentFX
