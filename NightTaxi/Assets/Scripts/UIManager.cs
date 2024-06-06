@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
@@ -6,17 +7,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject PickUp_DropManager;
     [SerializeField] private GameObject StartMenu;
     [SerializeField] private GameObject GameOverMenu;
+    [SerializeField] private GameObject GameOverMenuScore;
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject InGameUI;
+    [SerializeField] private GameObject SoundFX;
+    [SerializeField] private GameObject Music;
+    [SerializeField] private GameObject[] InGameUIText;
     [SerializeField] private GameObject[] BackGround;
     [SerializeField] private GameObject[] OptionMenuBackButton;
+    private bool TimeStarted = false;
 
-    public void Awake()
+    private void Awake()
     {
         SetTimeScale(0);
     }
 
-    public void Start()
+    private void Start()
     {
         GameOverMenu.SetActive(false);
         PauseMenu.SetActive(false);
@@ -28,10 +34,15 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (TimerManager.GetComponent<TimerManager>().GetTime() <= 0)
+        if (TimerManager.GetComponent<Timer>().TimeRemaining <= 0 && TimeStarted)
         {
             GameOver();
+            return;
         }
+
+        InGameUIText[0].GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + PickUp_DropManager.GetComponent<PickUp_DropManager>().getScore;
+        InGameUIText[1].GetComponent<TMPro.TextMeshProUGUI>().text = "Passengers: " + PickUp_DropManager.GetComponent<PickUp_DropManager>().getPassengers;
+        TimerManager.GetComponent<TimeDisplay>().DisplayTime(InGameUIText[2].GetComponent<TMPro.TextMeshProUGUI>(), TimerManager.GetComponent<Timer>());
     }
     private void SetTimeScale(float _timeScale)
     {
@@ -44,10 +55,12 @@ public class UIManager : MonoBehaviour
         GameOverMenu.SetActive(false);
         PauseMenu.SetActive(false);
         InGameUI.SetActive(true);
+        TimerManager.GetComponent<Timer>().StartTimer();
         foreach (GameObject bg in BackGround)
         {
             bg.SetActive(false);
         }
+        TimeStarted = true;
         SetTimeScale(1);
     }
 
@@ -105,7 +118,45 @@ public class UIManager : MonoBehaviour
         InGameUI.SetActive(false);
         BackGround[0].SetActive(false);
         BackGround[1].SetActive(true);
+        GameOverMenuScore.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + PickUp_DropManager.GetComponent<PickUp_DropManager>().getScore;
         SetTimeScale(0);
+    }
+
+    public void MainMenu()
+    {
+        StartMenu.SetActive(true);
+        GameOverMenu.SetActive(false);
+        PauseMenu.SetActive(false);
+        InGameUI.SetActive(false);
+        BackGround[0].SetActive(true);
+        BackGround[1].SetActive(false);
+        PickUp_DropManager.GetComponent<PickUp_DropManager>().ResetScore();
+        TimeStarted = false;
+        SetTimeScale(0);
+    }
+
+    public void MusicToggle(bool _toggle)
+    {
+        if (_toggle)
+        {
+            Music.SetActive(true);
+        }
+        else
+        {
+            Music.SetActive(false);
+        }
+    }
+
+    public void SFX(bool _toggle)
+    {
+        if (_toggle)
+        {
+            SoundFX.SetActive(true);
+        }
+        else
+        {
+            SoundFX.SetActive(false);
+        }
     }
 
     public void Quit()
