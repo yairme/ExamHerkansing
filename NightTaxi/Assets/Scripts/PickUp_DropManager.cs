@@ -20,24 +20,29 @@ public class PickUp_DropManager : MonoBehaviour
     private GameObject PickUpPoint;
     private GameObject[] DropPoints;
     private GameObject[] ActiveDropPoints;
+
     public int getPassengers
     {
         get => Passengers; 
     }
+
     public int getScore
     {
         get => Score; 
     }
+
     private void Awake()
     {  
         DropPoints = GameObject.FindGameObjectsWithTag("Drop"); //FindGameObjectsWithTag is used to find all objects with the tag "Drop" so you don't have to assign them manually
         PickUpPoint = GameObject.FindGameObjectWithTag("PickUp"); //FindGameObjectWithTag is used to find the object with the tag "PickUp" so you don't have to assign it manually
     }
+
     private void Start()
     {   
         SetupDropPoints(); //This method is called to set up the drop points
         SetupPickUpPoint(); //This method is called to set up the pick up point
     }
+
     public void ResetScore()
     {
         Passengers = 0;
@@ -50,6 +55,7 @@ public class PickUp_DropManager : MonoBehaviour
         }
         PickUpPoint.GetComponent<PickUp_Drop>().isItActive = false;
     }
+
     public void OnPickUp()
     {
         if (Passengers < MaxPassengers)
@@ -64,10 +70,12 @@ public class PickUp_DropManager : MonoBehaviour
             PickUpPoint.GetComponent<PickUp_Drop>().isItActive = true;
         }
     }
+
     public void OnDrop()
     {
         StartCoroutine(EnumeratorOnDrop());
     }
+
     private IEnumerator EnumeratorOnDrop()
     {
         Passengers--;
@@ -98,6 +106,7 @@ public class PickUp_DropManager : MonoBehaviour
             }
         }
     }
+
     private void SetupDropPoints()
     {
         foreach (GameObject dropPoint in DropPoints)
@@ -110,6 +119,7 @@ public class PickUp_DropManager : MonoBehaviour
         }
         ActiveDropPoints = new GameObject[MaxPassengers];
     }
+
     private void SetupPickUpPoint()
     {
         PickUpPoint.GetComponent<PickUp_Drop>().setTrigger = OnPickUpEvent;
@@ -117,6 +127,7 @@ public class PickUp_DropManager : MonoBehaviour
         Instantiate(PickUpHighlightEffect, PickUpPoint.transform.position + HighLightOffset, Quaternion.identity, PickUpPoint.transform);
         PickUpPoint.GetComponentInChildren<ParticleSystem>().Stop();
     }
+    
     private void RandomDropSetActive()
     {
         for (int i = 0; i < MaxPassengers; i++)
