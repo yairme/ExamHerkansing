@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class PickUp_Drop : MonoBehaviour
 {
-    private UnityEvent Trigger;
+    
     private bool IsActive;
-    public bool IsItActive
+    private UnityEvent Trigger;
+    public bool isItActive
     {
         get => IsActive; 
         set => IsActive = value; 
     }
-    public UnityEvent SetTrigger
+    public UnityEvent setTrigger
     {
         get => Trigger;
         set => Trigger = value;
