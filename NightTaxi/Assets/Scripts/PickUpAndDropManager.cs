@@ -2,16 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PickUp_DropManager : MonoBehaviour
+public class PickUpAndDropManager : MonoBehaviour
 {
     [SerializeField] private int MaxPassengers;
     [SerializeField] private int AddScore;
     [SerializeField] private Vector3 ParticleOffset;
-    [SerializeField] private Vector3 HighLightOffset;
     [SerializeField] private GameObject PickUpEffect;
     [SerializeField] private GameObject DropEffect;
-    [SerializeField] private GameObject DropHighlightEffect;
-    [SerializeField] private GameObject PickUpHighlightEffect;
     [SerializeField] private UnityEvent OnDropEvent;
     [SerializeField] private UnityEvent OnPickUpEvent;
     private int ActiveDropPointCount = 0;
@@ -20,6 +17,7 @@ public class PickUp_DropManager : MonoBehaviour
     private GameObject PickUpPoint;
     private GameObject[] DropPoints;
     private GameObject[] ActiveDropPoints;
+    private MeshRenderer PickUpRenderer;
 
     public int getPassengers
     {
@@ -50,10 +48,10 @@ public class PickUp_DropManager : MonoBehaviour
         ActiveDropPointCount = 0;
         for (int i = 0; i < DropPoints.Length; i++)
         {
-            DropPoints[i].GetComponent<PickUp_Drop>().isItActive = false;
+            DropPoints[i].GetComponent<PickUpAndDrop>().isItActive = false;
             DropPoints[i].SetActive(false);
         }
-        PickUpPoint.GetComponent<PickUp_Drop>().isItActive = false;
+        PickUpPoint.GetComponent<PickUpAndDrop>().isItActive = false;
     }
 
     public void OnPickUp()
@@ -67,7 +65,7 @@ public class PickUp_DropManager : MonoBehaviour
             {
                 PickUpPoint.GetComponentInChildren<ParticleSystem>().Play();
             }
-            PickUpPoint.GetComponent<PickUp_Drop>().isItActive = true;
+            PickUpPoint.GetComponent<PickUpAndDrop>().isItActive = true;
         }
     }
 
@@ -81,8 +79,8 @@ public class PickUp_DropManager : MonoBehaviour
         Passengers--;
         ActiveDropPointCount--;
         Score += AddScore;
-        PickUpPoint.GetComponent<PickUp_Drop>().isItActive = false;
-        if (PickUpPoint.GetComponentInChildren<ParticleSystem>().gameObject.tag == "PickUpHighlight" && !PickUpPoint.GetComponent<PickUp_Drop>().isItActive) //Check if the particle system has the tag "PickUpEffect"
+        PickUpPoint.GetComponent<PickUpAndDrop>().isItActive = false;
+        if (PickUpPoint.GetComponentInChildren<ParticleSystem>().gameObject.tag == "PickUpHighlight" && !PickUpPoint.GetComponent<PickUpAndDrop>().isItActive) //Check if the particle system has the tag "PickUpEffect"
         {
             PickUpPoint.GetComponentInChildren<ParticleSystem>().Play();
         }
@@ -90,9 +88,9 @@ public class PickUp_DropManager : MonoBehaviour
         {
             for (int j = 0; j < ActiveDropPoints.Length; j++)
             {
-                if (ActiveDropPoints[j] == DropPoints[i] && ActiveDropPoints[j].GetComponent<PickUp_Drop>().isItActive)
+                if (ActiveDropPoints[j] == DropPoints[i] && ActiveDropPoints[j].GetComponent<PickUpAndDrop>().isItActive)
                 {
-                    DropPoints[i].GetComponent<PickUp_Drop>().isItActive = false;
+                    DropPoints[i].GetComponent<PickUpAndDrop>().isItActive = false;
                     DropPoints[i].GetComponentInChildren<ParticleSystem>().Stop();
                     if (DropPoints[i].GetComponentInChildren<ParticleSystem>().gameObject.tag == "OnDropParticle") //Check if the particle system has the tag "DropEffect"
                     {
@@ -111,9 +109,8 @@ public class PickUp_DropManager : MonoBehaviour
     {
         foreach (GameObject dropPoint in DropPoints)
         {
-            dropPoint.GetComponent<PickUp_Drop>().setTrigger = OnDropEvent;
+            dropPoint.GetComponent<PickUpAndDrop>().setTrigger = OnDropEvent;
             Instantiate(DropEffect, dropPoint.transform.position + ParticleOffset, Quaternion.identity, dropPoint.transform);
-            Instantiate(DropHighlightEffect, dropPoint.transform.position + HighLightOffset, Quaternion.identity, dropPoint.transform);
             dropPoint.GetComponentInChildren<ParticleSystem>().Stop();
             dropPoint.SetActive(false);
         }
@@ -122,9 +119,8 @@ public class PickUp_DropManager : MonoBehaviour
 
     private void SetupPickUpPoint()
     {
-        PickUpPoint.GetComponent<PickUp_Drop>().setTrigger = OnPickUpEvent;
+        PickUpPoint.GetComponent<PickUpAndDrop>().setTrigger = OnPickUpEvent;
         Instantiate(PickUpEffect, PickUpPoint.transform.position + ParticleOffset, Quaternion.identity, PickUpPoint.transform);
-        Instantiate(PickUpHighlightEffect, PickUpPoint.transform.position + HighLightOffset, Quaternion.identity, PickUpPoint.transform);
         PickUpPoint.GetComponentInChildren<ParticleSystem>().Stop();
     }
     

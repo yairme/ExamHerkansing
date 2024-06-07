@@ -10,8 +10,9 @@ public class Timer : MonoBehaviour
     public float TimeRemaining
     {
         get => thisTimeRemaining; 
+        set => thisTimeRemaining = value;
     }
-    public void StartTimer()
+    private void Awake()
     { 
         thisTimeRemaining = timerDuration;
     }

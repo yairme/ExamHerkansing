@@ -109,10 +109,13 @@ public class Movement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        transform.position = other.transform.position;
-        if (!CheckTurn() && Physics.Raycast(transform.position, transform.forward, WallDistance))
+        if (other.CompareTag("Corner"))
         {
-            PlayerSpeed = 0;
+            transform.position = other.transform.position;
+            if (!CheckTurn() && Physics.Raycast(transform.position, transform.forward, WallDistance))
+            {
+                PlayerSpeed = 0;
+            }
         }
         //if (Pref == Turn.LEFT)
         //{
