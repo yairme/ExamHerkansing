@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         PlayerSpeed = BaseSpeed;
+
     }
 
     void FixedUpdate()
@@ -28,29 +29,7 @@ public class Movement : MonoBehaviour
             case Direction.UP:
                 if (CurentDirection == Direction.DOWN)
                 {
-                    // rotate naar boven
-                    CurentDirection = Input;
-                    PlayerSpeed = BaseSpeed;
-                }
-                Pref = Input;
-                break;
-
-            case Direction.DOWN:
-                if (CurentDirection == Direction.UP)
-                {
-                    // rotate naar beneden
-                    CurentDirection = Input;
-                    PlayerSpeed = BaseSpeed;
-                }
-                Pref = Input;
-                break;
-
-            case Direction.LEFT:
-                if (CurentDirection == Direction.RIGHT)
-                {
-                    // rotate naar links
-                    CurentDirection = Input;
-                    PlayerSpeed = BaseSpeed;
+                    MakeTurn(Input, 0);
                 }
                 Pref = Input;
                 break;
@@ -58,9 +37,23 @@ public class Movement : MonoBehaviour
             case Direction.RIGHT:
                 if (CurentDirection == Direction.LEFT)
                 {
-                    // rotate naar rechts
-                    CurentDirection = Input;
-                    PlayerSpeed = BaseSpeed;
+                    MakeTurn(Input, 90);
+                }
+                Pref = Input;
+                break;
+
+            case Direction.DOWN:
+                if (CurentDirection == Direction.UP)
+                {
+                    MakeTurn(Input, 180);
+                }
+                Pref = Input;
+                break;
+
+            case Direction.LEFT:
+                if (CurentDirection == Direction.RIGHT)
+                {
+                    MakeTurn(Input, 270);
                 }
                 Pref = Input;
                 break;
@@ -73,35 +66,41 @@ public class Movement : MonoBehaviour
             }
         }
     }
+    private void MakeTurn(Direction _Direction , int _Degree)
+    {
+        transform.rotation = Quaternion.Euler(0.0f, _Degree, 0.0f);
+        CurentDirection = _Direction;
+        PlayerSpeed = BaseSpeed;
+    }
     private bool CheckTurn()
     {
-        switch (Pref) // alles nog ff laten draaien
+        switch (Pref)
         {
             case Direction.UP:
                 if (!Physics.Raycast(transform.position, new Vector3(0, 0, 1), WallDistance))
                 {
-                    CurentDirection = Pref;
-                    return true;
-                }
-                break;
-            case Direction.DOWN:
-                if (!Physics.Raycast(transform.position, new Vector3(0, 0, -1), WallDistance))
-                {
-                    CurentDirection = Pref;
-                    return true;
-                }
-                break;
-            case Direction.LEFT:
-                if (!Physics.Raycast(transform.position, new Vector3(1, 0, 0), WallDistance))
-                {
-                    CurentDirection = Pref;
+                    MakeTurn(Pref, 0);
                     return true;
                 }
                 break;
             case Direction.RIGHT:
                 if (!Physics.Raycast(transform.position, new Vector3(-1, 0, 0), WallDistance))
                 {
-                    CurentDirection = Pref;
+                    MakeTurn(Pref, 90);
+                    return true;
+                }
+                break;
+            case Direction.DOWN:
+                if (!Physics.Raycast(transform.position, new Vector3(0, 0, -1), WallDistance))
+                {
+                    MakeTurn(Pref, 180);
+                    return true;
+                }
+                break;
+            case Direction.LEFT:
+                if (!Physics.Raycast(transform.position, new Vector3(1, 0, 0), WallDistance))
+                {
+                    MakeTurn(Pref, 270);
                     return true;
                 }
                 break;
