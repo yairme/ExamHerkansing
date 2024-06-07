@@ -2,16 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PickUp_DropManager : MonoBehaviour
+public class PickUpAndDropManager : MonoBehaviour
 {
     [SerializeField] private int MaxPassengers;
     [SerializeField] private int AddScore;
     [SerializeField] private Vector3 ParticleOffset;
-    [SerializeField] private Vector3 HighLightOffset;
     [SerializeField] private GameObject PickUpEffect;
     [SerializeField] private GameObject DropEffect;
-    [SerializeField] private GameObject DropHighlightEffect;
-    [SerializeField] private GameObject PickUpHighlightEffect;
     [SerializeField] private UnityEvent OnDropEvent;
     [SerializeField] private UnityEvent OnPickUpEvent;
     private int ActiveDropPointCount = 0;
@@ -82,10 +79,7 @@ public class PickUp_DropManager : MonoBehaviour
         ActiveDropPointCount--;
         Score += AddScore;
         PickUpPoint.GetComponent<PickUp_Drop>().isItActive = false;
-        if (PickUpPoint.GetComponentInChildren<ParticleSystem>().gameObject.tag == "PickUpHighlight" && !PickUpPoint.GetComponent<PickUp_Drop>().isItActive) //Check if the particle system has the tag "PickUpEffect"
-        {
-            PickUpPoint.GetComponentInChildren<ParticleSystem>().Play();
-        }
+
         for (int i = 0; i < DropPoints.Length; i++)
         {
             for (int j = 0; j < ActiveDropPoints.Length; j++)
