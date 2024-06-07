@@ -6,10 +6,9 @@ TagManager:
   tags:
   - PickUp
   - Drop
-  - DropHighlight
-  - PickUpHighlight
   - OnDropParticle
   - OnPickUpParticle
+  - Corner
   layers:
   - Default
   - TransparentFX
