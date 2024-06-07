@@ -1,7 +1,7 @@
 using UnityEngine.Events;
 using UnityEngine;
 
-public class PickUpAndDrop : MonoBehaviour
+public class PickUp_Drop : MonoBehaviour
 {
     
     private bool IsActive;
