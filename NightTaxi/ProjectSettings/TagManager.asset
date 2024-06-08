@@ -9,6 +9,7 @@ TagManager:
   - OnDropParticle
   - OnPickUpParticle
   - Corner
+  - Wall
   layers:
   - Default
   - TransparentFX

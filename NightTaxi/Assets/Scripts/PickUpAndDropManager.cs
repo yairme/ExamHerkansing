@@ -18,15 +18,16 @@ public class PickUpAndDropManager : MonoBehaviour
     private GameObject[] DropPoints;
     private GameObject[] ActiveDropPoints;
     private MeshRenderer PickUpRenderer;
-
     public int getPassengers
     {
         get => Passengers; 
+        set => Passengers = value;
     }
 
     public int getScore
     {
         get => Score; 
+        set => Score = value;
     }
 
     private void Awake()

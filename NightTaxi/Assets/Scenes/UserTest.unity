@@ -338,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 286804123867142007, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 286804123867142007, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -383,6 +383,10 @@ PrefabInstance:
     - target: {fileID: 3135234828748083593, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
       propertyPath: m_Name
       value: PRE_Taxi
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849073381852603126, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
+      propertyPath: m_Constraints
+      value: 48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -608,6 +612,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
+      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1007897285}
+    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
       propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1457455435}
@@ -624,16 +632,24 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: AddTime
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
+      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnPickUp
       objectReference: {fileID: 0}
     - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
       propertyPath: OnDropEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: Timer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
+      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Timer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
       propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PickUp_DropManager, Assembly-CSharp
+      value: PickUpAndDropManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
       propertyPath: OnDropEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName

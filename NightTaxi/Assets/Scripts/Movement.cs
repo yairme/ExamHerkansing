@@ -14,7 +14,6 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         PlayerSpeed = BaseSpeed;
-
     }
 
     void FixedUpdate()
@@ -22,40 +21,40 @@ public class Movement : MonoBehaviour
         transform.Translate(PlayerSpeed * Time.deltaTime * Vector3.forward);
     }
 
-    public void TurnDirection(Direction Input)
+    public void TurnDirection(Direction _Input)
     {
-        switch (Input)
+        switch (_Input)
         {
             case Direction.UP:
                 if (CurentDirection == Direction.DOWN)
                 {
-                    MakeTurn(Input, 0);
+                    MakeTurn(_Input, 0);
                 }
-                Pref = Input;
+                Pref = _Input;
                 break;
 
             case Direction.RIGHT:
                 if (CurentDirection == Direction.LEFT)
                 {
-                    MakeTurn(Input, 90);
+                    MakeTurn(_Input, 90);
                 }
-                Pref = Input;
+                Pref = _Input;
                 break;
 
             case Direction.DOWN:
                 if (CurentDirection == Direction.UP)
                 {
-                    MakeTurn(Input, 180);
+                    MakeTurn(_Input, 180);
                 }
-                Pref = Input;
+                Pref = _Input;
                 break;
 
             case Direction.LEFT:
                 if (CurentDirection == Direction.RIGHT)
                 {
-                    MakeTurn(Input, 270);
+                    MakeTurn(_Input, 270);
                 }
-                Pref = Input;
+                Pref = _Input;
                 break;
         }
         if (PlayerSpeed == 0)
@@ -109,7 +108,7 @@ public class Movement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Corner"))
+        if (other.tag == "Corner" )
         {
             transform.position = other.transform.position;
             if (!CheckTurn() && Physics.Raycast(transform.position, transform.forward, WallDistance))
