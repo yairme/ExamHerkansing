@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject TimerManager;
-    [SerializeField] private GameObject PickUp_DropManager;
+    [SerializeField] private GameObject PickUpAndDropManager;
     [SerializeField] private GameObject StartMenu;
     [SerializeField] private GameObject GameOverMenu;
     [SerializeField] private GameObject GameOverMenuScore;
@@ -34,14 +35,17 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (TimerManager.GetComponent<Timer>().TimeRemaining <= 0 && TimeStarted)
+        if (TimerManager.GetComponent<Timer>().TimeRemaining < 0 && TimeStarted)
         {
             GameOver();
             return;
         }
-
-        InGameUIText[0].GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + PickUp_DropManager.GetComponent<PickUp_DropManager>().getScore;
-        InGameUIText[1].GetComponent<TMPro.TextMeshProUGUI>().text = "Passengers: " + PickUp_DropManager.GetComponent<PickUp_DropManager>().getPassengers;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseButton();
+        }
+        InGameUIText[0].GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + PickUpAndDropManager.GetComponent<PickUpAndDropManager>().getScore;
+        InGameUIText[1].GetComponent<TMPro.TextMeshProUGUI>().text = "Passengers: " + PickUpAndDropManager.GetComponent<PickUpAndDropManager>().getPassengers;
         TimerManager.GetComponent<TimeDisplay>().DisplayTime(InGameUIText[2].GetComponent<TMPro.TextMeshProUGUI>(), TimerManager.GetComponent<Timer>());
     }
     private void SetTimeScale(float _timeScale)
@@ -55,7 +59,6 @@ public class UIManager : MonoBehaviour
         GameOverMenu.SetActive(false);
         PauseMenu.SetActive(false);
         InGameUI.SetActive(true);
-        TimerManager.GetComponent<Timer>().StartTimer();
         foreach (GameObject bg in BackGround)
         {
             bg.SetActive(false);
@@ -118,7 +121,7 @@ public class UIManager : MonoBehaviour
         InGameUI.SetActive(false);
         BackGround[0].SetActive(false);
         BackGround[1].SetActive(true);
-        GameOverMenuScore.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + PickUp_DropManager.GetComponent<PickUp_DropManager>().getScore;
+        GameOverMenuScore.GetComponent<TMPro.TextMeshProUGUI>().text = "Score: " + PickUpAndDropManager.GetComponent<PickUpAndDropManager>().getScore;
         SetTimeScale(0);
     }
 
@@ -130,7 +133,7 @@ public class UIManager : MonoBehaviour
         InGameUI.SetActive(false);
         BackGround[0].SetActive(true);
         BackGround[1].SetActive(false);
-        PickUp_DropManager.GetComponent<PickUp_DropManager>().ResetScore();
+        PickUpAndDropManager.GetComponent<PickUpAndDropManager>().ResetScore();
         TimeStarted = false;
         SetTimeScale(0);
     }
