@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8f01e96f0f60a47af539571ad90a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimerDuration: 60
-  AddedTime: 10
-  gameOverPanel: {fileID: 0}
+  timerDuration: 60
+  addedTime: 15
 --- !u!114 &3827424353728763615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,4 +59,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880aab16d6be6ab46aa3f79dc8d4c707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: {fileID: 1739360184443303720}
