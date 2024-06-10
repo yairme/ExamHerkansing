@@ -134,6 +134,7 @@ public class UIManager : MonoBehaviour
         BackGround[0].SetActive(true);
         BackGround[1].SetActive(false);
         PickUpAndDropManager.GetComponent<PickUpAndDropManager>().ResetScore();
+        TimerManager.GetComponent<Timer>().TimerReset();
         TimeStarted = false;
         SetTimeScale(0);
     }
