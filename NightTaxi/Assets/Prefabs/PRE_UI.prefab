@@ -1718,7 +1718,7 @@ MonoBehaviour:
   PickUpAndDropManager: {fileID: 0}
   StartMenu: {fileID: 1053731958364702162}
   GameOverMenu: {fileID: 6802477355784732767}
-  GameOverMenuScore: {fileID: 8572779182545066069}
+  GameOverMenuScore: {fileID: 7208870637364365297}
   PauseMenu: {fileID: 3169540587574221535}
   InGameUI: {fileID: 8594052224313410559}
   SoundFX: {fileID: 3139842950273379725}
