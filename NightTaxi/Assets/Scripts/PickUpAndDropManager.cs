@@ -18,7 +18,7 @@ public class PickUpAndDropManager : MonoBehaviour
     private GameObject PickUpPoint;
     private GameObject[] DropPoints;
     private GameObject[] ActiveDropPoints;
-    private MeshRenderer PickUpRenderer;
+    
     public int getPassengers
     {
         get => Passengers; 
