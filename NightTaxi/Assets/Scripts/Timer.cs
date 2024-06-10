@@ -7,12 +7,12 @@ public class Timer : MonoBehaviour
     [SerializeField] private float timerDuration;
     [SerializeField] private float addedTime;
     private float thisTimeRemaining;
-
     public float TimeRemaining
     {
         get => thisTimeRemaining; 
+        set => thisTimeRemaining = value;
     }
-    public void StartTimer()
+    private void Awake()
     { 
         thisTimeRemaining = timerDuration;
     }

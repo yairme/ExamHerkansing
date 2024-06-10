@@ -6,10 +6,10 @@ TagManager:
   tags:
   - PickUp
   - Drop
-  - DropHighlight
-  - PickUpHighlight
   - OnDropParticle
   - OnPickUpParticle
+  - Corner
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -17,7 +17,11 @@ TagManager:
   - 
   - Water
   - UI
+<<<<<<< HEAD
   - PostProcess
+=======
+  - Wall
+>>>>>>> develop
   - 
   - 
   - 

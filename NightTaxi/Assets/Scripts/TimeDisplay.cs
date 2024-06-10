@@ -4,21 +4,19 @@ using UnityEngine.Serialization;
 
 public class TimeDisplay : MonoBehaviour
 {
-    [SerializeField] private Timer timer;
-    
-    public void DisplayTime(TextMeshProUGUI TimerText)
+    public void DisplayTime(TextMeshProUGUI _timerText, Timer _timer)
     {
-        float minutes = Mathf.FloorToInt(timer.TimeRemaining / 60);
-        float seconds = Mathf.FloorToInt(timer.TimeRemaining % 60);
-        TimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        float minutes = Mathf.FloorToInt(_timer.TimeRemaining / 60);
+        float seconds = Mathf.FloorToInt(_timer.TimeRemaining % 60);
+        _timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         
-        if (timer.TimeRemaining < 10)
+        if (_timer.TimeRemaining < 10)
         {
-            TimerText.color = Color.red;
+            _timerText.color = Color.red;
         }
         else
         {
-            TimerText.color = Color.white;
+            _timerText.color = Color.white;
         }
     }
 }

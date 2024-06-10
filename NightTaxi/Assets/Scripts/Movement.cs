@@ -3,22 +3,20 @@ public enum Direction
 {
     UP,DOWN, LEFT, RIGHT
 }
-public enum Turn
-{
-    BASE, LEFT, RIGHT
-}
 public class Movement : MonoBehaviour
 {
     [SerializeField] private float BaseSpeed;
     [SerializeField] private float WallDistance;
+    [SerializeField] private Direction CurentDirection = Direction.UP;
     private float PlayerSpeed;
-    private Direction CurentDirection = Direction.UP;
-    private Direction TempDirection;
-    private Turn Pref = Turn.BASE;
+    private Vector3 ForwardDir;
+    private Direction Pref;
 
     private void Start()
     {
         PlayerSpeed = BaseSpeed;
+        Pref = CurentDirection;
+        SetDirection();
     }
 
     void FixedUpdate()
@@ -26,169 +24,130 @@ public class Movement : MonoBehaviour
         transform.Translate(PlayerSpeed * Time.deltaTime * Vector3.forward);
     }
 
-    private void Update()
+    public void TurnDirection(Direction _Input)
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        switch (_Input)
         {
-            Rigth();
+            case Direction.UP:
+                if (CurentDirection == Direction.DOWN)
+                {
+                    MakeTurn(_Input, 0);
+                }
+                Pref = _Input;
+                break;
+
+            case Direction.RIGHT:
+                if (CurentDirection == Direction.LEFT)
+                {
+                    MakeTurn(_Input, 90);
+                }
+                Pref = _Input;
+                break;
+
+            case Direction.DOWN:
+                if (CurentDirection == Direction.UP)
+                {
+                    MakeTurn(_Input, 180);
+                }
+                Pref = _Input;
+                break;
+
+            case Direction.LEFT:
+                if (CurentDirection == Direction.RIGHT)
+                {
+                    MakeTurn(_Input, 270);
+                }
+                Pref = _Input;
+                break;
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (PlayerSpeed == 0)
         {
-            Left();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            Down();
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            Up();
+            if (CheckTurn())
+            {
+                PlayerSpeed = BaseSpeed;
+            }
         }
     }
 
-    private void Rigth()
+    private void MakeTurn(Direction _Direction, int _Degree)
+    {
+        transform.rotation = Quaternion.Euler(0.0f, _Degree, 0.0f);
+        CurentDirection = _Direction;
+        PlayerSpeed = BaseSpeed;
+        SetDirection();
+    }
+
+    private void SetDirection()
     {
         switch (CurentDirection)
         {
             case Direction.UP:
-                Pref = Turn.RIGHT;
+                ForwardDir = new Vector3(0, 0, 1);
                 break;
             case Direction.DOWN:
-                Pref = Turn.LEFT;
+                ForwardDir = new Vector3(0, 0, -1);
                 break;
             case Direction.LEFT:
-                Turning(Turn.BASE);
-                CurentDirection = Direction.RIGHT;
-                return;
+                ForwardDir = new Vector3(-1, 0, 0);
+                break;
             case Direction.RIGHT:
-                return;
+                ForwardDir = new Vector3(1, 0, 0);
+                break;
         }
-       TempDirection = Direction.RIGHT;
     }
 
-    private void Left()
+    private bool CheckTurn()
     {
-        switch (CurentDirection)
+        if(Pref == CurentDirection)
+        {
+            return false;
+        }
+        switch (Pref)
         {
             case Direction.UP:
-                Pref = Turn.LEFT;
-                break;
-            case Direction.DOWN:
-                Pref = Turn.RIGHT;
-                break;
-            case Direction.RIGHT:
-                Turning(Turn.BASE);
-                CurentDirection = Direction.LEFT;
-                return;
-            case Direction.LEFT:
-                return;
-        }
-        TempDirection = Direction.LEFT;
-    }
-
-    private void Down()
-    {
-        switch (CurentDirection)
-        {
-            case Direction.UP:
-                Turning(Turn.BASE);
-                CurentDirection = Direction.DOWN;
-                return;
-            case Direction.RIGHT:
-                Pref = Turn.RIGHT;
-                break;
-            case Direction.LEFT:
-                Pref = Turn.LEFT;
-                break;
-            case Direction.DOWN:
-                return;
-        }
-        TempDirection = Direction.DOWN;
-    }
-
-    private void Up()
-    {
-        switch (CurentDirection)
-        {
-            case Direction.DOWN:
-                Turning(Turn.BASE);
-                CurentDirection = Direction.UP;
-                return;
-            case Direction.LEFT:
-                Pref = Turn.RIGHT;
+                if (!Physics.Raycast(transform.position, new Vector3(0, 0, 1), WallDistance, 6))
+                {
+                    MakeTurn(Pref, 0);
+                    return true;
+                }
                 break;
             case Direction.RIGHT:
-                Pref = Turn.LEFT;
+                if (!Physics.Raycast(transform.position, new Vector3(1, 0, 0), WallDistance, 6))
+                {
+                    MakeTurn(Pref, 90);
+                    return true;
+                }
                 break;
-            case Direction.UP:
-                return;
+            case Direction.DOWN:
+                if (!Physics.Raycast(transform.position, new Vector3(0, 0, -1), WallDistance, 6))
+                {
+                    MakeTurn(Pref, 180);
+                    return true;
+                }
+                break;
+            case Direction.LEFT:
+                if (!Physics.Raycast(transform.position, new Vector3(-1, 0, 0), WallDistance, 6))
+                {
+                    MakeTurn(Pref, 270);
+                    return true;
+                }
+                break;
         }
-        TempDirection = Direction.UP;
+        return false;
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        transform.position = other.transform.position;
-        if (Pref == Turn.LEFT)
+        if (other.CompareTag("Corner"))
         {
-            if (!Physics.Raycast(transform.position, Vector3.Cross(transform.forward, transform.up), WallDistance))
-            {
-                Turning(Turn.LEFT);
-            }
-        }
-        if (Pref == Turn.RIGHT)
-        {
-            if (Physics.Raycast(transform.position, Vector3.Cross(transform.forward, -transform.up), WallDistance))
-            {
-                Turning(Turn.RIGHT);
-            }
-        }
-        if (Physics.Raycast(transform.position, transform.forward, WallDistance))
-        {
-            PlayerSpeed = 0;
-        }
-    }
-
-    private void Turning(Turn _turn)
-    {
-        switch (_turn)
-        {
-            case Turn.BASE:
-                transform.Rotate(Vector3.up * -180.0f);
+            transform.position = other.transform.position;
+            if (CheckTurn())
+            {   
                 return;
-            case Turn.LEFT:
-                transform.Rotate(Vector3.up * -90.0f);
-                break;
-            case Turn.RIGHT:
-                transform.Rotate(Vector3.up * 90.0f);
-                break;
-            default:
-                break;
+            }
+            if (Physics.Raycast(transform.position, ForwardDir, WallDistance))
+            {
+                PlayerSpeed = 0;
+            }
         }
-        CurentDirection = TempDirection;
     }
-
-    //private void StopMovement()
-    //{
-    //    PlayerSpeed = 0;
-    //    //switch (Pref)
-    //    //{
-    //    //    case Turn.BASE:
-    //    //            Physics.Raycast(transform.position, Vector3.right, out RaycastHit _right, 10);
-    //    //            if (!_right.collider.CompareTag("Wall"))
-    //    //            {
-    //    //                Pref = Turn.RIGHT;
-    //    //            }
-    //    //            Pref = Turn.LEFT;
-    //    //        break;
-
-    //    //    case Turn.LEFT:
-    //    //        // wait for down or right input
-    //    //        break;
-
-    //    //    case Turn.RIGHT:
-    //    //        // wait for left or down input
-    //    //        break;
-    //    //}
-    //}
 }
