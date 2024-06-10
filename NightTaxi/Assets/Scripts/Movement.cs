@@ -105,28 +105,28 @@ public class Movement : MonoBehaviour
         switch (Pref)
         {
             case Direction.UP:
-                if (!Physics.Raycast(transform.position, new Vector3(0, 0, 1), WallDistance, 6))
+                if (!Physics.Raycast(transform.position, new Vector3(0, 0, 1), WallDistance))
                 {
                     MakeTurn(Pref, 0);
                     return true;
                 }
                 break;
             case Direction.RIGHT:
-                if (!Physics.Raycast(transform.position, new Vector3(1, 0, 0), WallDistance, 6))
+                if (!Physics.Raycast(transform.position, new Vector3(1, 0, 0), WallDistance))
                 {
                     MakeTurn(Pref, 90);
                     return true;
                 }
                 break;
             case Direction.DOWN:
-                if (!Physics.Raycast(transform.position, new Vector3(0, 0, -1), WallDistance, 6))
+                if (!Physics.Raycast(transform.position, new Vector3(0, 0, -1), WallDistance))
                 {
                     MakeTurn(Pref, 180);
                     return true;
                 }
                 break;
             case Direction.LEFT:
-                if (!Physics.Raycast(transform.position, new Vector3(-1, 0, 0), WallDistance, 6))
+                if (!Physics.Raycast(transform.position, new Vector3(-1, 0, 0), WallDistance))
                 {
                     MakeTurn(Pref, 270);
                     return true;

@@ -16,6 +16,10 @@ public class Timer : MonoBehaviour
     { 
         thisTimeRemaining = timerDuration;
     }
+    public void TimerReset()
+    { 
+        thisTimeRemaining = timerDuration;
+    }
 
     void Update()
     {
