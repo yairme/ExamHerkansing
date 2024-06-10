@@ -205,7 +205,7 @@ Transform:
   m_GameObject: {fileID: 836329499}
   serializedVersion: 2
   m_LocalRotation: {x: 0.67559016, y: 0, z: 0, w: 0.7372774}
-  m_LocalPosition: {x: 0, y: 25, z: 3.2}
+  m_LocalPosition: {x: 0, y: 30, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -329,18 +329,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 286804123867142007, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 286804123867142007, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 286804123867142007, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 286804123867142007, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
       objectReference: {fileID: 0}
@@ -396,14 +384,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PRE_Taxi
       objectReference: {fileID: 0}
-    - target: {fileID: 3849073381852603126, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
-      propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5230219173574112756, guid: 2e8207a8af9b7fa4885e4d9f7d447a7b, type: 3}
-      propertyPath: WallDistance
-      value: 0.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -414,17 +394,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1423519149346318642, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
   m_PrefabInstance: {fileID: 1931821177}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1457455435 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-  m_PrefabInstance: {fileID: 1931821177}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1457455434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: babbec263bb07fe4284bcc0f46aa3b66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1507840091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433,14 +402,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1739360184443303720, guid: a65cb4ed4c095ed43b5f930f4b860384, type: 3}
-      propertyPath: addedTime
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1739360184443303720, guid: a65cb4ed4c095ed43b5f930f4b860384, type: 3}
-      propertyPath: timerDuration
-      value: 120
-      objectReference: {fileID: 0}
     - target: {fileID: 2785468298587503329, guid: a65cb4ed4c095ed43b5f930f4b860384, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -498,14 +459,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1391719817843158069, guid: faa5177f52d786a429a97f8127cb3e8e, type: 3}
-      propertyPath: m_TileAnchor.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391719817843158069, guid: faa5177f52d786a429a97f8127cb3e8e, type: 3}
-      propertyPath: m_TileAnchor.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3355704378059680866, guid: faa5177f52d786a429a97f8127cb3e8e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -608,73 +561,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnDropEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnDropEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnDropEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1007897285}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
       propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1007897285}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1457455435}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnDropEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnDropEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: AddTime
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AddTime
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: OnPickUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnDropEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Timer, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Timer, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PickUpAndDropManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnDropEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8768314256973799458, guid: b663d217d11fcfc42a4d8b65357f7b20, type: 3}
-      propertyPath: OnPickUpEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -691,10 +580,6 @@ PrefabInstance:
     - target: {fileID: 529219514220873234, guid: c0c9dc9c033bddc4d820e6075abad254, type: 3}
       propertyPath: m_Name
       value: PRE_UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 529219514220873234, guid: c0c9dc9c033bddc4d820e6075abad254, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1138752378873601407, guid: c0c9dc9c033bddc4d820e6075abad254, type: 3}
       propertyPath: TimerManager
