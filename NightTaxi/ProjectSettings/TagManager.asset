@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - PickUp
-  - Drop
-  - OnDropParticle
-  - OnPickUpParticle
-  - Corner
-  - Wall
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -17,11 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-<<<<<<< HEAD
-  - PostProcess
-=======
-  - Wall
->>>>>>> develop
+  - 
   - 
   - 
   - 

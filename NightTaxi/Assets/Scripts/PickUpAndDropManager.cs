@@ -62,15 +62,20 @@ public class PickUpAndDropManager : MonoBehaviour
         {
             Passengers = MaxPassengers;
             RandomDropSetActive();
-            PickUpPoint.GetComponentInChildren<ParticleSystem>().Play();
-            PickUpPoint.GetComponent<MeshRenderer>().gameObject.SetActive(false);
             PickUpPoint.GetComponent<PickUpAndDrop>().isItActive = true;
+            PickUpPoint.SetActive(false);
         }
     }
 
     public void OnDrop()
     {
         StartCoroutine(EnumeratorOnDrop());
+
+        if (!PickUpPoint.activeSelf)
+        {
+            PickUpPoint.SetActive(true);
+            PickUpPoint.GetComponent<PickUpAndDrop>().isItActive = false;
+        }
     }
 
     private IEnumerator EnumeratorOnDrop()
@@ -78,8 +83,6 @@ public class PickUpAndDropManager : MonoBehaviour
         Passengers--;
         ActiveDropPointCount--;
         Score += AddScore;
-        PickUpPoint.GetComponent<PickUpAndDrop>().isItActive = false;
-        PickUpPoint.GetComponentInChildren<MeshRenderer>().gameObject.SetActive(true);
 
         for (int i = 0; i < DropPoints.Length; i++)
         {
@@ -87,10 +90,10 @@ public class PickUpAndDropManager : MonoBehaviour
             {
                 if (ActiveDropPoints[j] == DropPoints[i] && ActiveDropPoints[j].GetComponent<PickUpAndDrop>().isItActive)
                 {
-                    DropPoints[i].GetComponent<PickUpAndDrop>().isItActive = false;
-                    DropPoints[i].GetComponentInChildren<MeshRenderer>().gameObject.SetActive(false);
+  
                     DropPoints[i].GetComponentInChildren<ParticleSystem>().Play();
                     yield return new WaitForSeconds(DropPoints[i].GetComponentInChildren<ParticleSystem>().main.duration);
+                    DropPoints[i].GetComponent<PickUpAndDrop>().isItActive = false;
                     DropPoints[i].SetActive(false);
                     ActiveDropPoints[j] = null;
                     break;
@@ -106,7 +109,6 @@ public class PickUpAndDropManager : MonoBehaviour
             dropPoint.GetComponent<PickUpAndDrop>().setTrigger = OnDropEvent;
             Instantiate(DropEffect, dropPoint.transform.position + ParticleOffset, Quaternion.identity, dropPoint.transform);
             dropPoint.GetComponentInChildren<ParticleSystem>().Stop();
-            dropPoint.GetComponent<MeshRenderer>().gameObject.SetActive(true);
             dropPoint.SetActive(false);
         }
         ActiveDropPoints = new GameObject[MaxPassengers];
@@ -116,8 +118,6 @@ public class PickUpAndDropManager : MonoBehaviour
     {
         PickUpPoint.GetComponent<PickUpAndDrop>().setTrigger = OnPickUpEvent;
         Instantiate(PickUpEffect, PickUpPoint.transform.position + ParticleOffset, Quaternion.identity, PickUpPoint.transform);
-        PickUpPoint.GetComponentInChildren<ParticleSystem>().Stop();
-
     }
     
     private void RandomDropSetActive()
@@ -132,7 +132,7 @@ public class PickUpAndDropManager : MonoBehaviour
                 if (ActiveDropPoints[i] != null) continue;//This line is added to prevent null reference exception (IndexOutOfRangeException
                 ActiveDropPoints[i] = DropPoints[randomIndex];
                 DropPoints[randomIndex].SetActive(true);
-                DropPoints[randomIndex].GetComponentInChildren<MeshRenderer>().gameObject.SetActive(true);
+                DropPoints[randomIndex].GetComponentInChildren<ParticleSystem>().Stop();
                 ActiveDropPointCount++;
             }
         }
