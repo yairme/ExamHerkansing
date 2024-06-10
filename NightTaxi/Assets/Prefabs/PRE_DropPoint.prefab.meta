@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:NightTaxi/Assets/Prefabs/DropPoint.prefab.meta
+guid: dcdb1f97a45af7242a12ba0f2c33ff3c
+========
 guid: 35dc6006e7caaf24d832c1c8f586f7ec
+>>>>>>>> develop:NightTaxi/Assets/Prefabs/PRE_DropPoint.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

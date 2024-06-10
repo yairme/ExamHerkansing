@@ -11,6 +11,7 @@ public class PickUpAndDropManager : MonoBehaviour
     [SerializeField] private GameObject DropEffect;
     [SerializeField] private UnityEvent OnDropEvent;
     [SerializeField] private UnityEvent OnPickUpEvent;
+
     private int ActiveDropPointCount = 0;
     private int Passengers = 0;
     private int Score = 0;
@@ -61,11 +62,8 @@ public class PickUpAndDropManager : MonoBehaviour
         {
             Passengers = MaxPassengers;
             RandomDropSetActive();
-            PickUpPoint.GetComponentInChildren<ParticleSystem>().Stop();
-            if (PickUpPoint.GetComponentInChildren<ParticleSystem>().gameObject.tag == "OnPickUpParticle") //Check if the particle system has the tag "PickUpEffect"
-            {
-                PickUpPoint.GetComponentInChildren<ParticleSystem>().Play();
-            }
+            PickUpPoint.GetComponentInChildren<ParticleSystem>().Play();
+            PickUpPoint.GetComponent<MeshRenderer>().gameObject.SetActive(false);
             PickUpPoint.GetComponent<PickUpAndDrop>().isItActive = true;
         }
     }
@@ -81,10 +79,8 @@ public class PickUpAndDropManager : MonoBehaviour
         ActiveDropPointCount--;
         Score += AddScore;
         PickUpPoint.GetComponent<PickUpAndDrop>().isItActive = false;
-        if (PickUpPoint.GetComponentInChildren<ParticleSystem>().gameObject.tag == "PickUpHighlight" && !PickUpPoint.GetComponent<PickUpAndDrop>().isItActive) //Check if the particle system has the tag "PickUpEffect"
-        {
-            PickUpPoint.GetComponentInChildren<ParticleSystem>().Play();
-        }
+        PickUpPoint.GetComponentInChildren<MeshRenderer>().gameObject.SetActive(true);
+
         for (int i = 0; i < DropPoints.Length; i++)
         {
             for (int j = 0; j < ActiveDropPoints.Length; j++)
@@ -92,12 +88,9 @@ public class PickUpAndDropManager : MonoBehaviour
                 if (ActiveDropPoints[j] == DropPoints[i] && ActiveDropPoints[j].GetComponent<PickUpAndDrop>().isItActive)
                 {
                     DropPoints[i].GetComponent<PickUpAndDrop>().isItActive = false;
-                    DropPoints[i].GetComponentInChildren<ParticleSystem>().Stop();
-                    if (DropPoints[i].GetComponentInChildren<ParticleSystem>().gameObject.tag == "OnDropParticle") //Check if the particle system has the tag "DropEffect"
-                    {
-                        DropPoints[i].GetComponentInChildren<ParticleSystem>().Play();
-                        yield return new WaitForSeconds(DropPoints[i].GetComponentInChildren<ParticleSystem>().main.duration);
-                    }
+                    DropPoints[i].GetComponentInChildren<MeshRenderer>().gameObject.SetActive(false);
+                    DropPoints[i].GetComponentInChildren<ParticleSystem>().Play();
+                    yield return new WaitForSeconds(DropPoints[i].GetComponentInChildren<ParticleSystem>().main.duration);
                     DropPoints[i].SetActive(false);
                     ActiveDropPoints[j] = null;
                     break;
@@ -113,6 +106,7 @@ public class PickUpAndDropManager : MonoBehaviour
             dropPoint.GetComponent<PickUpAndDrop>().setTrigger = OnDropEvent;
             Instantiate(DropEffect, dropPoint.transform.position + ParticleOffset, Quaternion.identity, dropPoint.transform);
             dropPoint.GetComponentInChildren<ParticleSystem>().Stop();
+            dropPoint.GetComponent<MeshRenderer>().gameObject.SetActive(true);
             dropPoint.SetActive(false);
         }
         ActiveDropPoints = new GameObject[MaxPassengers];
@@ -123,6 +117,7 @@ public class PickUpAndDropManager : MonoBehaviour
         PickUpPoint.GetComponent<PickUpAndDrop>().setTrigger = OnPickUpEvent;
         Instantiate(PickUpEffect, PickUpPoint.transform.position + ParticleOffset, Quaternion.identity, PickUpPoint.transform);
         PickUpPoint.GetComponentInChildren<ParticleSystem>().Stop();
+
     }
     
     private void RandomDropSetActive()
@@ -137,10 +132,7 @@ public class PickUpAndDropManager : MonoBehaviour
                 if (ActiveDropPoints[i] != null) continue;//This line is added to prevent null reference exception (IndexOutOfRangeException
                 ActiveDropPoints[i] = DropPoints[randomIndex];
                 DropPoints[randomIndex].SetActive(true);
-                if (DropPoints[randomIndex].GetComponentInChildren<ParticleSystem>().gameObject.tag == "DropHighlight") //Check if the particle system has the tag "PickUpEffect"
-                {
-                    DropPoints[randomIndex].GetComponentInChildren<ParticleSystem>().Play();
-                }
+                DropPoints[randomIndex].GetComponentInChildren<MeshRenderer>().gameObject.SetActive(true);
                 ActiveDropPointCount++;
             }
         }

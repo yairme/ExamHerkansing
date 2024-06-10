@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7537564284221385205}
   - component: {fileID: 8768314256973799458}
+  - component: {fileID: 1612030751276172544}
   m_Layer: 0
   m_Name: PRE_PickUpDropManager
   m_TagString: Untagged
@@ -47,11 +48,8 @@ MonoBehaviour:
   MaxPassengers: 3
   AddScore: 100
   ParticleOffset: {x: 0, y: 3, z: 0}
-  HighLightOffset: {x: 0, y: 3, z: 0}
   PickUpEffect: {fileID: 6083886616841353965, guid: 1a0424d842f41db4981778ac2ab93355, type: 3}
   DropEffect: {fileID: 5746570202999380494, guid: 77a227d6d345e7c47a42a757786f0cf4, type: 3}
-  DropHighlightEffect: {fileID: 4765400607892174493, guid: b0b75fb28217e7f40ac17f06654f7493, type: 3}
-  PickUpHighlightEffect: {fileID: 2391106016096463041, guid: 2914f689ba9120d49b5cb5a0ad9aff87, type: 3}
   OnDropEvent:
     m_PersistentCalls:
       m_Calls:
@@ -82,3 +80,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1612030751276172544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423519149346318642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 6281b87e7c5ba0f498bde00051216842, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
