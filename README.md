@@ -1,7 +1,7 @@
 ### [Trello][TR]
 [TR]: https://trello.com/b/xBCFrkO7/nighttaxi-project
 
-#Game Ontwerp: Night Taxi
+## Game Ontwerp: Night Taxi
 Teammates:
 - Stefan
 - Yair
