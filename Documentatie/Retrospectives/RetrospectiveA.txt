@@ -1,0 +1,27 @@
+Retrospective A
+
+Hier kijken wij terug op hoe wij hebben gewerkt in het proef proeve en eind examen en zullen verbeteringen hier op maken
+
+George:
+- Tijdens het proef proeve en examen project gaf ik het al snel op om nog sterk contact te houden tussen mij en mijn teamgenote. Ik nam het advies van "werk zelfstandig" te serieus en daardoor is onze communicatie flink verslechtered. Zelfs al werken andere mensen anders dan ik moet ik daar langs kunnen kijken en toch gewoon met hun kunnen samen werken terwijl ik er rekening mee hou. Dit is ook exact wat ik zal doen om het deze keer betere te doen, we gaan meer contact houden met elkaar en zorgen er voor dat wij allemaal duidelijk zijn over wat wij doen zelfs al loop ik het risico dat gesprekken niet altijd perfect gaan.
+- Vanwege ruzies die rond het begin van het project plaats vonden ontstond er een soort oncomfortabele lucht waar niemand iets durfde te zeggen tegen elkaar over hun werk. Dit zorgde ook voor veel verwarring en communicatie problemen tussen elkaar. Ik maakte het extra erg omdat ik SCRUM master en Notulist was, dus communicatie vermijden om conflict te voorkomen was niet een goeie optie. Dit ga ik anders doen door langs die ruzies te kijken en zo veel mogelijk aanwezig zijn met de rest. Hoe beter contact ik hou met de rest hoe beter ik op de zelfde page kan blijven met het project en teamgenoten.
+
+Stefan: 
+- vorige keer was ik vrij sinische en pesimistische. dit ga ik deze keer oplossen door wat positiefer/profesioneler er in te staan. inplaats van te zwijgen.
+- ook was ik heel snel afgeleid, waar mijn werk onder leiden. dit ga ik oplossen door stimulerende muziek te spelen en afleidingen uit de weg gaan.
+Yair:
+- De laatste keer dat ik er niet vaak was, was ik het grootste deel van het project ziek, dus werkte ik niet veel met de anderen.
+- Ook werkte ik niet goed met de planning en voorbereiding op Trello, waardoor mijn werk incorrect werd gedocumenteerd
+
+Gezamelijke punten:
+- Wij hebben niet onze prioriteiten goed op volgorde gesteld tijdens het eind examen project. Dit zullen wij op te lossen door meer op elkaar te letten met waar iedereen mee bezig is,
+gezamelijk kijken of het belangrijk is en gezamelijk afspreken waar iedereen mee bezig gaat. Met duidelijkere Stand Ups en Downs zullen we dit kunnen behalen.
+- Wij hebben vorige keer niet het product afgemaakt. Het product moet af om dit examen te halen en dit gaan wij oplossen door dagelijkse commits aan te houden en hulp aan te bieden aan elkaar
+als iemand vast zit.
+- Onze workflow was slordig en niet goed aangehouden. Dit kwam grotendeels door demotivatie en dit gaan wij oplossen door minder ruzie te maken en als het er toch op aankomt proberen er langs
+te kijken en gezamelijk verder te werken.
+- Iedereen is veel apart gaan werken tijdens het eind examen. Dit kwam door ongemakkelijke situaties in het begin van het project (ruzie/afwezigheden). Dit gaan wij oplossen door beter te
+communiceren over elkaar's werk zodat er minder verwarringen ontstaan.
+- Wij kwamen vaak in tijds nood met het project vlak voor de presentatie. Dit kwam veel door niet goed tijds inschattingen te nemen voor de taken die wij doen. Dit lossen wij op door voor
+elke To-Do proberen een inschatting te maken over hoe lang het zou duren om af te krijgen met de rest. We gaan ook proberen ver van te voren belangrijke documentatie te plannen (voorbeeld: User testing)
+zodat we daar later ook niet tegen aan zullen lopen.
