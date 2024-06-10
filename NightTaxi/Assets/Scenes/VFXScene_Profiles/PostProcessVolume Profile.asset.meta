@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:NightTaxi/Assets/Scenes/VFXScene_Profiles/PostProcessVolume Profile.asset.meta
+guid: 6281b87e7c5ba0f498bde00051216842
+========
+guid: 196ec283c795efc44b9f5291541d2fd8
+>>>>>>>> develop:NightTaxi/Assets/Prefabs/Taxi.mat.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
