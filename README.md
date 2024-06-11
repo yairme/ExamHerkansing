@@ -1,5 +1,6 @@
 ### [Trello][TR]
 [TR]: https://trello.com/b/xBCFrkO7/nighttaxi-project
+[GitWiki](https://github.com/yairme/NightTaxi.wiki.git)
 
 ## Game Ontwerp: Night Taxi
 Teammates:
